@@ -1,4 +1,5 @@
-# install python 3.7 + requests on Centos7 Dockerfile
+# Add the following lines to your Dockerfile to install python 3.7 + requests on Centos7 images
+
 RUN yum -y install gcc \
         && yum -y install openssl-devel \
         && yum -y install make \

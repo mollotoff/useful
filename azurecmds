@@ -1,0 +1,4 @@
+# Useful commands for managing Azure
+
+# When using multiple Azure subscriptions, it makes sense to have an alias for switching the subs. Add the following lines to your .bashrc file:
+alias $SUBSCRIPTIONNAME='az account set -s $SUBSCRIPTIONID'

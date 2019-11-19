@@ -1,0 +1,7 @@
+To install KubeCTX, KubeNS and FZF into Microsoft Azure Cloud Shell, do the following while having an active Cloud Shell Session:
+
+1. git clone https://github.com/ahmetb/kubectx.git
+2. vi ~/.bashrc
+3. add KubeCTX path to $PATH env
+4. git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf ~/.fzf/install
+5. export path: export PATH=$PATH:/home/$USERNAME/clouddrive/.bin/kubectx (or whereever you have it installed)

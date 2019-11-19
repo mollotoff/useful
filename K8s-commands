@@ -6,3 +6,6 @@ kubectl -n $NAMESPACE delete pods --field-selector=status.phase!=$STATUS
 
 # get Azure Key Vault secrets (Tool: sparebank AzureKeyVaultInjector)
 kubectl get akvs -o yaml
+
+# delete EVERYTHING in cluster (reads data from JSONs)
+kubectl get * --all-namespaces -o json | k delete -f -

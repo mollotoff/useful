@@ -1,0 +1,8 @@
+# select all pods which are not in status "$STATUS" in $NAMESPACE
+kubectl -n $NAMESPACE get pods --field-selector=status.phase!=$STATUS
+
+# delete all pods which are not in status "$STATUS" in $NAMESPACE
+kubectl -n $NAMESPACE delete pods --field-selector=status.phase!=$STATUS
+
+# get Azure Key Vault secrets (Tool: sparebank AzureKeyVaultInjector)
+kubectl get akvs -o yaml

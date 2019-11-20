@@ -4,10 +4,10 @@ metadata:
   name: $NGINXNAME
 spec:
   rules:
-  - host: $WEBADRESS #for example hyperk8sapp.mydomain.com
+  - host: $WWW #for example hyperk8sapp.mydomain.com
     http:
       paths:
       - path: /
         backend:
-          serviceName: §NGINXSERVICENAME
+          serviceName: $NGINXSERVICENAME
           servicePort: 80

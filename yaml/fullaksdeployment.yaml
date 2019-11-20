@@ -64,7 +64,7 @@ spec:
         - name: $volname
           azureFile:
             shareName: $volpath
-## ENTER YOUR SECRET NAME FOR ACCESSING THE SWIFTENTERPRISE STORAGE ACCOUNT            
+## ENTER YOUR SECRET NAME FOR ACCESSING THE STORAGE ACCOUNT            
             secretName: $secretname
             readOnly: false
         - name: $mountname
@@ -100,7 +100,7 @@ metadata:
 #spec:
 #  rules:
 ## Enter your HTTP application routing domain of the AKS OR FQDN URL if it is added in DNS
-## Example: - host: swift-apache.196f04063bc549dcb315.centralus.aksapp.io    
+## Example: - host: blabla.196f04063bc549dcb315.centralus.aksapp.io    
    - host: $HOSTDOMAIN   
       http:
        paths:

@@ -1,0 +1,112 @@
+# Use this, if HTTP application routing should be used
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: $deploymentname
+spec:
+  replicas: $replicacount
+  selector:
+    matchLabels:
+     app: $appname
+  template:
+    metadata:
+      labels:
+        app: $appname
+    spec:
+      containers:
+        - name: $containername
+          image: $linktoconatinerimage
+          env:
+            - name: MY_POD_IP # not mandatory
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+            - name: MY_POD_NAME # not mandatory
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+#Set Timezone to container 
+#Please refer link for Timezone code need to pass as per you location. For example India= Asia/Kolkata
+#LINK: http://manpages.ubuntu.com/manpages/bionic/man3/DateTime::TimeZone::Catalog.3pm.html
+            - name: TZ
+              value: "Etc/UTC"
+#MEMORY ALLOCATION 
+#EXAMPLE
+#2GB=2048, 3GB=3072 , 4GB=4096,... ETC                                
+            - name: RAM
+              value: "4096"
+#EXAMPLE VALUE 1 
+            - name: $valuename1
+              value: "value1"
+#EXAMPLE VALUE 2             
+            - name: $valuename2
+              value: "value2"
+#EXAMPLE VALUE 3            
+            - name: $valuename3
+              value: "$value3"
+## SET THE CPU AND MEMORY CONFIGURATION              
+          resources:
+            requests:
+              cpu: "$cpu"
+              memory: XGi
+            limits:
+              cpu: "$cpu"
+              memory: XGi
+## PUBLISHED THE CONTAINER PORT
+          ports:
+            - containerPort: $containerport
+## MOUNT THE PATH FOR PERSISTANT STORAGE              
+          volumeMounts:
+            - name: $mountname
+              mountPath: $mountpath
+      volumes:
+        - name: $volname
+          azureFile:
+            shareName: $volpath
+## ENTER YOUR SECRET NAME FOR ACCESSING THE SWIFTENTERPRISE STORAGE ACCOUNT            
+            secretName: $secretname
+            readOnly: false
+        - name: $mountname
+          azureFile:
+            shareName: $sharename
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: $servicename
+spec:
+  type: ClusterIP
+  clusterIP: None
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 8080
+      name: "http"  
+  selector:
+    app: $appname
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: $ingressname
+   namespace: $NS
+  annotations:  
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: "6000"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "6000"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "6000"
+#   kubernetes.io/ingress.class: addon-http-application-routing
+    nginx.ingress.kubernetes.io/affinity
+#spec:
+#  rules:
+## Enter your HTTP application routing domain of the AKS OR FQDN URL if it is added in DNS
+## Example: - host: swift-apache.196f04063bc549dcb315.centralus.aksapp.io    
+   - host: $HOSTDOMAIN   
+      http:
+       paths:
+          - backend:
+              serviceName: $name
+              servicePort: 80
+            path: /                       
+           
+ 

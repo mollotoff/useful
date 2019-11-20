@@ -1,0 +1,13 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: $NGINXNAME
+spec:
+  rules:
+  - host: $WEBADRESS #for example hyperk8sapp.mydomain.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: §NGINXSERVICENAME
+          servicePort: 80

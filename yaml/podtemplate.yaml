@@ -1,0 +1,21 @@
+apiVersion: apps/v1 
+kind: Deployment
+metadata:
+  name: $PODNAME
+spec:
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: $PODLABEL #should be similar to name
+  replicas: 1 
+  template: 
+    metadata:
+      labels:
+        app: $PODLABEL
+    spec:
+      containers:
+      - name: $IMAGENAME
+        image: $LINKTOIMAGE
+        ports:
+        - containerPort: $CONTAINERPORTS

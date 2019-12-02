@@ -2,3 +2,8 @@
 
 # When using multiple Azure subscriptions, it makes sense to have an alias for switching the subs. Add the following lines to your .bashrc file:
 alias $SUBSCRIPTIONNAME='az account set -s $SUBSCRIPTIONID'
+
+#For LogAnalytics Workspaces - Queries
+AzureDiagnostics
+| where msg_s contains "91.189.89.198" and msg_s contains "Allow" 
+| top 50 by TimeGenerated desc 

@@ -12,3 +12,6 @@ kubectl get * --all-namespaces -o json | k delete -f -
 
 # show events
 kubectl get events --sort-by=.metadata.creationTimestamp -A
+
+# edit deployment "on-the-fly"
+kubectl edit deploy $DEPLOYMENTNAME

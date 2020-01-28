@@ -15,3 +15,6 @@ kubectl get events --sort-by=.metadata.creationTimestamp -A
 
 # edit deployment "on-the-fly"
 kubectl edit deploy $DEPLOYMENTNAME
+
+# deploy one-time busybox via CLI
+kubectl run -it --rm debug-to-be-deleted --image=busybox --restart=Never sh

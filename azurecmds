@@ -7,3 +7,6 @@ alias $SUBSCRIPTIONNAME='az account set -s $SUBSCRIPTIONID'
 AzureDiagnostics
 | where msg_s contains "91.189.89.198" and msg_s contains "Allow" 
 | top 50 by TimeGenerated desc 
+
+# Get Tenant ID quick w/o entering AAD - run command on Azure CLI
+az account get-access-token --query tenant --output tsv

@@ -18,3 +18,6 @@ kubectl edit deploy $DEPLOYMENTNAME
 
 # deploy one-time busybox via CLI
 kubectl run -it --rm debug-to-be-deleted --image=busybox --restart=Never sh
+
+# copy secrets between namespaces
+kubectl get secret $SECRETNAME --namespace=$NAMESPACE1 --export -o yaml | kubectl apply --namespace=$NAMESPACE2 -f -

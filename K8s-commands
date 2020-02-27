@@ -21,3 +21,5 @@ kubectl run -it --rm debug-to-be-deleted --image=busybox --restart=Never sh
 
 # copy secrets between namespaces
 kubectl get secret $SECRETNAME --namespace=$NAMESPACE1 --export -o yaml | kubectl apply --namespace=$NAMESPACE2 -f -
+#or
+kube get <resouce> -o yaml | code - <remove unwanted lines> -> kube apply -f /tmp/file
